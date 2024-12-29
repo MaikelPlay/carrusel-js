@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>UD 4 - Ejercicio 3</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Variable global
+    let imagenesVisibles = 3;
+
+    // Manejador para cuando se pulse el botón #btnSiguiente
+    function alPulsarSiguiente() {
+      let carrusel = document.querySelector('.carrusel');
+
+      let primerItem = document.querySelector('.carrusel-item');
+      primerItem.classList.add('oculto');
+      carrusel.appendChild(primerItem);
+
+      let primerOculto = carrusel.children[imagenesVisibles - 1];
+      primerOculto.classList.remove('oculto');
+    }
+
+    // Manejador para cuando se entre en una imagen
+    function alEntrarEnImagen(e) {
+      console.log('Evento: ' + e.type); //Evento: tipo_de_evento_producido (tomado del objeto Event)
+      console.log('Entraste en la imagen: ' + this.alt);// Entraste en la imagen: contenido_del_atributo_alt_de_la_imagen
+      console.log('En las coordenadas (' + e.clientX + ', ' + e.clientY + ')'); //En las coordenadas (coordenadaX, coordenadaY) de la ventana del navegador
+      console.log('En las coordenadas (' + e.offsetX + ', ' + e.offsetY + ')');//En las coordenadas (coordenadaX, coordenadaY) de la imagen
+      console.log('En la fecha y hora: ' + Date(e.timestamp));//En la fecha y hora: fecha_y_hora_a_partir_de_la_marca_de_tiempo_del_evento
+      //NOTA: Para mostrar la fecha y la hora a partir de la marca de tiempo (timestamp) del evento, puede usarse la instrucción Date(marca_de_tiempo_del_evento).
+
+    }
+
+    // Función main()
+    function main() {
+      // Asignar manejador al botón "Siguiente"
+      let btnSiguiente = document.getElementById('btnSiguiente');
+      btnSiguiente.addEventListener('click', alPulsarSiguiente);
+
+      
+      let images = document.querySelectorAll('.carrusel-item img');
+      for (let img of images) {
+
+      img.addEventListener('mouseover', alEntrarEnImagen);
+    }
+  }
+
+    // Tras cargarse la página, llamar a main()
+    window.addEventListener('load', main);
+  
+  </script>
+</head>
+<body>
+  <header id="page-header">
+    <div class="wrapper-carrusel">
+      <nav class="carrusel">
+        <div class="carrusel-item">
+          <img src="img/image-1.jpg" alt="Imagen 1">
+        </div>
+        <div class="carrusel-item">
+          <img src="img/image-2.jpg" alt="Imagen 2">
+        </div>
+        <div class="carrusel-item">
+          <img src="img/image-3.jpg" alt="Imagen 3">
+        </div>
+        <div class="carrusel-item oculto">
+          <img src="img/image-4.jpg" alt="Imagen 4">
+        </div>
+        <div class="carrusel-item oculto">
+          <img src="img/image-5.jpg" alt="Imagen 5">
+        </div>
+        <div class="carrusel-item oculto">
+          <img src="img/image-6.jpg" alt="Imagen 6">
+        </div>
+      </nav>
+      <div class="carrusel-controls">
+        <button id="btnSiguiente" class="carrusel-btn">&gt;</button>
+      </div>
+    </div>
+  </header> 
+</body>
+</html>
